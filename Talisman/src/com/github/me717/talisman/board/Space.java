@@ -15,6 +15,20 @@ import com.github.me717.talisman.cards.*;
  * 
  */
 public class Space {
+
+	private static final String[] OUTER_NAMES = { "Village", "Fields",
+			"Graveyard", "Woods", "Sentinel", "Hills", "Chapel", "Fields",
+			"Crags", "Plains", "Woods", "Fields", "City", "Fields", "Hills",
+			"Plains", "Woods", "Plains", "Tavern", "Fields", "Ruins", "Plains",
+			"Forest", "Fields" };
+	private static final String[] MIDDLE_NAMES = { "Portal of Power",
+			"Black Knight", "Hidden Valley", "Cursed Glade", "Runes", "Chasm",
+			"Runes", "Warlock's Cave", "Desert", "Oasis", "Desert", "Temple",
+			"Woods", "Runes", "Castle" };
+	private static final String[] INNER_NAMES = { "Plain of Peril", "Mines",
+			"Vampire's Tower", "Pitfiends", "Valley of Fire", "Werewolf",
+			"Dice with Death", "Crypt" };
+
 	/**
 	 * The name of the space. Different spaces on the board may have the same
 	 * name.
@@ -32,7 +46,14 @@ public class Space {
 		OUTER, MIDDLE, INNER
 	}
 
+	/**
+	 * The cards on the space
+	 */
 	private PriorityQueue<Card> cards;
+	/**
+	 * The characters on the space
+	 */
+	private ArrayList<PChar> players;
 
 	/**
 	 * Creates the space
@@ -42,28 +63,19 @@ public class Space {
 	 * @param id
 	 */
 	public Space(int id, Region r) {
-		// TODO Space constructor
+		// Set the name of the space
 		if (r.equals(Region.OUTER)) {
-			switch (id) {
-			case 0:
-				name = "Village";
-				break;
-			}
+			name = OUTER_NAMES[id];
 		} else if (r.equals(Region.MIDDLE)) {
-			switch (id) {
-			case 0:
-				name = "Portal of Power";
-				break;
-			}
+			name = MIDDLE_NAMES[id];
 		} else if (r.equals(Region.INNER)) {
-			switch (id) {
-			case 0:
-				name = "Plain of Peril";
-				break;
-			}
+			name = INNER_NAMES[id];
 		} else {
 			name = "Crown of Command";
 		}
+		// Initialize variables
+		cards = new PriorityQueue<Card>();
+		players = new ArrayList<PChar>();
 	}
 
 	public void dropCard(Card c) {
@@ -83,7 +95,8 @@ public class Space {
 		PriorityQueue<Card> drawn = null;
 		if (name.equals("Woods") || name.equals("Plains")
 				|| name.equals("Fields") || name.equals("Hills")
-				|| name.equals("Portal of Power") || name.equals("Sentinel")) {
+				|| name.equals("Portal of Power") || name.equals("Sentinel")
+				|| name.equals("Cursed Glade")) {
 			drawn = drawCards(1, player.getGame());
 		} else if (name.equals("Ruins") || name.equals("Oasis")) {
 			drawn = drawCards(2, player.getGame());
@@ -117,11 +130,9 @@ public class Space {
 			// TODO temple
 		} else if (name.equals("Warlock's Cave")) {
 			// TODO warlocks cave
-		} else if (name.equals("Cursed glade")) {
-			// TODO cursed glade
 		}
-		if(drawn != null && drawn.size()>0){
-			for(Card card : drawn){
+		if (drawn != null && drawn.size() > 0) {
+			for (Card card : drawn) {
 				card.onDraw(player);
 			}
 		}
@@ -134,7 +145,7 @@ public class Space {
 			if (cards.size() > 0) {
 				toDraw.add(cards.poll());
 			} else {
-				// TODO draw card
+				toDraw.add(game.drawCards(1));
 			}
 		}
 		return toDraw;

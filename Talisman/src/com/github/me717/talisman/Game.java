@@ -5,7 +5,6 @@ import java.util.*;
 import com.github.me717.talisman.board.*;
 import com.github.me717.talisman.cards.*;
 
-
 /**
  * A class representing the game itself
  * 
@@ -52,15 +51,13 @@ public class Game {
 		}
 	}
 
-	public PriorityQueue<Card> drawCards(int numToDraw){
+	public Card drawCards(int numToDraw) {
+		Card ret;
 		Random dice = new Random();
-		PriorityQueue<Card> ret = new PriorityQueue<Card>();
-		for(int i=0;i<numToDraw;i++){
-			int draw = dice.nextInt(deck.size());
-			ret.add(deck.remove(draw));
-			if(deck.size()==0){
-				fillDeck();
-			}
+		int draw = dice.nextInt(deck.size());
+		ret = deck.remove(draw);
+		if (deck.size() == 0) {
+			fillDeck();
 		}
 		return ret;
 	}
@@ -90,7 +87,7 @@ public class Game {
 	 */
 	public void fillDeck() {
 		deck = new ArrayList<Card>();
-		//TODO fill the deck
+		// TODO fill the deck
 	}
 
 	public <V> V getUserInput(ArrayList<V> options) {
