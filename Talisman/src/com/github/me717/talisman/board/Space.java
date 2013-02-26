@@ -62,7 +62,7 @@ public class Space {
 				break;
 			}
 		} else {
-			name = "Crown of F**king Command";
+			name = "Crown of Command";
 		}
 	}
 
