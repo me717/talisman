@@ -72,10 +72,25 @@ public class PChar implements Combatant{
 	 * The followers the player currently has
 	 */
 	private ArrayList<ObjectCard> followers;
+	/**
+	 * The stength enemies the player has killed
+	 */
 	private ArrayList<Integer> strengthPelts;
+	/**
+	 * the craft enemies the player has killed
+	 */
 	private ArrayList<Integer> craftPelts;
+	/**
+	 * a reference to the game that the player is involved in
+	 */
 	private Game game;
+	/**
+	 * The number of lives the player has left
+	 */
 	private int lives;
+	/**
+	 * If true, the player skips their next turn
+	 */
 	private boolean skipping;
 	/**
 	 * Assigns values to each of the variables based on the name of the
@@ -94,8 +109,10 @@ public class PChar implements Combatant{
 		// Stats same for all characters
 		gold = 1;
 		numWeapons = 0;
-		setLives(3);
+		lives = 3;
+		//Initialize variables
 		objects = new ArrayList<ObjectCard>();
+		objectNames = new HashSet<String>();
 		followers = new ArrayList<ObjectCard>();
 		craftPelts = new ArrayList<Integer>();
 		strengthPelts = new ArrayList<Integer>();
@@ -125,13 +142,15 @@ public class PChar implements Combatant{
 			align = Alignment.Evil;
 			// Values for the Minstrel
 		} else if (name == "Minstrel") {
-			// TODO lookup Minstrel stats
+			strength = 3;
+			craft = 3;
+			align = Alignment.Neutral;
 			// Values for the Monk
 		} else if (name == "Monk") {
 			strength = 2;
 			craft = 3;
 			align = Alignment.Good;
-			// Values for the Pries
+			// Values for the Priest
 		} else if (name == "Priest") {
 			strength = 2;
 			craft = 3;
@@ -210,6 +229,13 @@ public class PChar implements Combatant{
 	 */
 	public boolean canAddObject(ObjectCard object) {
 		// TODO special conditions
+		
+		// Holy lance and holy grail
+		if(object.getName().equals("Holy Lance")||object.getName().equals("Holy Grail")){
+			return align!=Alignment.Evil;
+		}else if(object.getName().equals("Runesword")){
+			return align!=Alignment.Good;
+		}
 		return true;
 	}
 

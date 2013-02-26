@@ -7,9 +7,9 @@ package com.github.me717.talisman.board;
  */
 public class Board {
 	
-	private static final int OUTER_REGION_SIZE = 24;
-	private static final int MIDDLE_REGION_SIZE = 16;
-	private static final int INNER_REGION_SIZE = 8;
+	public static final int OUTER_REGION_SIZE = 24;
+	public static final int MIDDLE_REGION_SIZE = 16;
+	public static final int INNER_REGION_SIZE = 8;
 	
 	private Space[] outerRegion, middleRegion, innerRegion;
 	
