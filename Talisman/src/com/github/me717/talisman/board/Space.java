@@ -106,9 +106,13 @@ public class Space {
 		} else if (name.equals("Chasm")) {
 			// TODO chasm
 		} else if (name.equals("Deset")) {
-			player.setLives(player.getLives() - 1);
-			player.getGame().outputString(
-					player.getName() + " has lost a life in the desert");
+			if (!player.hasObjectByName("Holy Grail")
+					&& !player.hasObjectByName("Water Bottle")) {
+				player.setLives(player.getLives() - 1);
+
+				player.getGame().outputString(
+						player.getName() + " has lost a life in the desert");
+			}
 		} else if (name.equals("Temple")) {
 			// TODO temple
 		} else if (name.equals("Warlock's Cave")) {
@@ -116,7 +120,6 @@ public class Space {
 		} else if (name.equals("Cursed glade")) {
 			// TODO cursed glade
 		}
-
 
 	}
 

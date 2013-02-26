@@ -213,6 +213,14 @@ public class PChar implements Combatant{
 		return true;
 	}
 
+	/**
+	 * 
+	 * @param name the name to check
+	 * @return whether or not a player has an object of this name
+	 */
+	public boolean hasObjectByName(String name){
+		return objectNames.contains(name);
+	}
 	private void refreshSet() {
 		objectNames.clear();
 
