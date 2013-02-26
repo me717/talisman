@@ -12,8 +12,17 @@ import com.github.me717.talisman.cards.*;
  * @author Albert
  */
 public class Game {
+	/**
+	 * The deck of adventure cards
+	 */
 	private ArrayList<Card> deck;
+	/**
+	 * The characters playing the game
+	 */
 	private ArrayList<PChar> players;
+	/**
+	 * The board the game is being played on
+	 */
 	private Board board;
 
 	/**
@@ -36,7 +45,7 @@ public class Game {
 			int roll = rollDice(1, p.getName(), " movement");
 			ArrayList<Space> options = Movement.getMovementOptions(p, roll,
 					board);
-			Space s = options.get(getUserInput());
+			Space s = getUserInput(options);
 			s.onLand(p);
 		} else {
 			outputString(p.getName() + " has skipped their turn");
@@ -84,8 +93,8 @@ public class Game {
 		//TODO fill the deck
 	}
 
-	public int getUserInput() {
+	public <V> V getUserInput(ArrayList<V> options) {
 		// TODO get user input
-		return 0;
+		return null;
 	}
 }

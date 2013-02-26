@@ -1,5 +1,5 @@
 /**
- * 
+ * Contains the board, spaces, and anything related to movement
  */
 package com.github.me717.talisman.board;
 
@@ -80,7 +80,7 @@ public class Space {
 	public void onLand(PChar player) {
 		player.setSpace(this);
 		// TODO encounter characters
-		PriorityQueue<Card> drawn;
+		PriorityQueue<Card> drawn = null;
 		if (name.equals("Woods") || name.equals("Plains")
 				|| name.equals("Fields") || name.equals("Hills")
 				|| name.equals("Portal of Power") || name.equals("Sentinel")) {
@@ -119,6 +119,11 @@ public class Space {
 			// TODO warlocks cave
 		} else if (name.equals("Cursed glade")) {
 			// TODO cursed glade
+		}
+		if(drawn != null && drawn.size()>0){
+			for(Card card : drawn){
+				card.onDraw(player);
+			}
 		}
 
 	}

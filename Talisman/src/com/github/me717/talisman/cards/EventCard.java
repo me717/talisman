@@ -20,6 +20,7 @@ public class EventCard extends Card {
 	@Override
 	public void onDraw(PChar player) {
 		// TODO onDraw Events
+		
 
 	}
 
