@@ -93,6 +93,10 @@ public class PChar implements Combatant{
 	 */
 	private boolean skipping;
 	/**
+	 * If true, the player 
+	 */
+	private boolean teleport;
+	/**
 	 * Assigns values to each of the variables based on the name of the
 	 * character
 	 * 
@@ -116,7 +120,7 @@ public class PChar implements Combatant{
 		followers = new ArrayList<ObjectCard>();
 		craftPelts = new ArrayList<Integer>();
 		strengthPelts = new ArrayList<Integer>();
-
+		setTeleport(false);
 		// Values for the Assassin
 		if (name == "Assassin") {
 			strength = 3;
@@ -182,7 +186,24 @@ public class PChar implements Combatant{
 			align = Alignment.Evil;
 		}
 	}
+	
+	@Override
+	/**
+	 * If a was defeated, allow stealing.  If the enemy is peltable, add it to the pelts
+	 */
+	public void onWin(Combatant opponent) {
+		if(opponent.isPeltable()){
+			addPelt((EnemyCard) opponent);
+		}
+		if(opponent.isRobable()){
+			//TODO player defeats another player
+		}
+	}
 
+	/**
+	 * Adds a defeated enemy to the list of pelts
+	 * @param e the defeated enemy
+	 */
 	public void addPelt(EnemyCard e){
 		if(e.isPsychic()){
 			craftPelts.add(e.getPower(true));
@@ -409,6 +430,36 @@ public class PChar implements Combatant{
 	public boolean isSkipping() {
 		return skipping;
 	}
+
+	/**
+	 * @return the teleport
+	 */
+	public boolean isTeleport() {
+		return teleport;
+	}
+
+	/**
+	 * @param teleport the teleport to set
+	 */
+	public void setTeleport(boolean teleport) {
+		this.teleport = teleport;
+	}
+
+	@Override
+	public boolean isPeltable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	/**
+	 * All players are robbable
+	 * @return true
+	 */
+	public boolean isRobable() {
+		return true;
+	}
+
 
 
 

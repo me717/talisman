@@ -12,4 +12,7 @@ public interface Combatant {
 	public int getPower(boolean psychic);
 	public String getName();
 	public Game getGame();
+	public void onWin(Combatant opponent);
+	public boolean isPeltable();
+	public boolean isRobable();
 }
