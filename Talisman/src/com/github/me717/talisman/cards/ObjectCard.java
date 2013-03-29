@@ -24,7 +24,7 @@ public class ObjectCard extends Card {
 
 	public ObjectCard(String name, String text, boolean follower, boolean weapon) {
 		super(name, text, "Object", 5);
-		this.setFollower(follower);
+		this.follower = follower;
 		this.weapon = weapon;
 		if (follower) {
 			this.setType("Follower");
@@ -63,14 +63,6 @@ public class ObjectCard extends Card {
 	 */
 	public void onRemove(PChar player) {
 		// TODO Objects onRemove
-	}
-
-	/**
-	 * @param follower
-	 *            the follower to set
-	 */
-	public void setFollower(boolean follower) {
-		this.follower = follower;
 	}
 
 	/**

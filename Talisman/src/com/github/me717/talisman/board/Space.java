@@ -145,7 +145,7 @@ public class Space {
 			if (cards.size() > 0) {
 				toDraw.add(cards.poll());
 			} else {
-				toDraw.add(game.drawCards(1));
+				toDraw.addAll(game.drawCards(1));
 			}
 		}
 		return toDraw;
